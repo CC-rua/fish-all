@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>fish-base</module>
-        <module>fish-protocal</module>
+        <module>fish-protocol</module>
     </modules>
 
     <properties>
