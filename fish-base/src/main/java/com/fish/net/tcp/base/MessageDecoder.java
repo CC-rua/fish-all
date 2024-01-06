@@ -12,6 +12,7 @@ import java.util.List;
 public class MessageDecoder extends MessageToMessageDecoder<ByteBuf> {
 
     static final int msgHeaderLen = 16;
+
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
         if (in.readableBytes() >= msgHeaderLen) {

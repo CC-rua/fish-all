@@ -1,6 +1,5 @@
 package com.fish.net.tcp.client;
 
-import com.fish.config.MyServerConfig;
 import com.fish.net.tcp.base.MessageDecoder;
 import com.fish.net.tcp.base.MessageEncoder;
 import io.netty.channel.ChannelInitializer;
@@ -23,9 +22,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> {
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
-        MyServerConfig config = MyServerConfig.INSTANCE;
         pipeline.addLast(new IdleStateHandler(0L, 0L, 3600L, TimeUnit.SECONDS))
                 .addLast(new HttpClientCodec())
                 .addLast(WebSocketClientCompressionHandler.INSTANCE)

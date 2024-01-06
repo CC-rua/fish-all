@@ -3,14 +3,7 @@ package com.fish.net.tcp.client;
 import com.fish.net.tcp.base.MessageProtocol;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
-import io.netty.util.ReferenceCountUtil;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 
 
 @Slf4j
@@ -29,6 +22,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<MessageProtocol> 
     protected void channelRead0(ChannelHandlerContext ctx, MessageProtocol message) throws Exception {
 
     }
+
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
 

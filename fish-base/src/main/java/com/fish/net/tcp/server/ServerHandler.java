@@ -6,7 +6,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 
-
 @Slf4j
 public class ServerHandler extends SimpleChannelInboundHandler<MessageProtocol> {
 
@@ -23,6 +22,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<MessageProtocol> 
     protected void channelRead0(ChannelHandlerContext ctx, MessageProtocol message) throws Exception {
 
     }
+
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
 
