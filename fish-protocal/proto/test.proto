@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.fish.protocol;
+
+option java_package = "com.fish.protocol";
+option java_outer_classname = "TestProtocol";
+
+//测试请求
+message TestReq{
+  string message = 1;
+}
+
+//测试回应
+message TestResp{
+  string message = 1;
+}
