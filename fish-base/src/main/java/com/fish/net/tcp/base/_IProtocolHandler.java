@@ -2,7 +2,7 @@ package com.fish.net.tcp.base;
 
 import com.google.protobuf.MessageLite;
 
-public interface ProtocolHandler {
+public interface _IProtocolHandler {
     MessageLite.Builder toMessage(MessageProtocol protocol);
 
     MessageProtocol toProtocol(MessageLite.Builder message, int seqNum, int responseCode);

@@ -16,7 +16,7 @@ public class MessageProtocol implements Serializable {
 
     private Integer responseCode;
     private byte[] data;
-    private ProtocolHandler protocolHandler;
+    private _IProtocolHandler IProtocolHandler;
 
     public int getDataLength() {
         if (this.data == null) {
@@ -26,6 +26,6 @@ public class MessageProtocol implements Serializable {
     }
 
     public MessageLite.Builder getMessage() {
-        return protocolHandler.toMessage(this);
+        return IProtocolHandler.toMessage(this);
     }
 }

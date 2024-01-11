@@ -41,6 +41,7 @@ public class TcpServer {
                     // 绑定端口，开始接收进来的连接
                     .bind().sync();
         } catch (Exception e) {
+            e.printStackTrace();
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

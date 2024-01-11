@@ -1,12 +1,14 @@
 package com.fish.net.tcp.server;
 
 import com.fish.net.tcp.base.MessageProtocol;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
+@Sharable
 public class ServerHandler extends SimpleChannelInboundHandler<MessageProtocol> {
 
     public ServerHandler() {
@@ -20,16 +22,17 @@ public class ServerHandler extends SimpleChannelInboundHandler<MessageProtocol> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageProtocol message) throws Exception {
-
+        log.info("信道读取 - channel id:{} message:{}", ctx.channel().id(), message);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
-
+        log.info("信道失效 - channel id {}", ctx.channel().id());
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        log.info("信道活跃 - channel id {}", ctx.channel().id());
         super.channelActive(ctx);
     }
 
