@@ -1,6 +1,6 @@
 netty:
   ip: 127.0.0.1
-  port: 6790
+  port: 6791
   use_epoll: false
 server:
-  port: 6790
+  port: 6791

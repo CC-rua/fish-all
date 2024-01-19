@@ -33,6 +33,12 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
                 .addLast(new MessageDecoder())
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new MessageEncoder())
-                .addLast(new ClientHandler());
+                .addLast(makeClientHandler());
+    }
+
+    private ClientHandler makeClientHandler() {
+        ClientHandler clientHandler = new ClientHandler();
+        clientHandler.register(ClientChannelManager.INSTANCE);
+        return clientHandler;
     }
 }

@@ -14,4 +14,12 @@ public class ChannelObj {
     public ChannelObj(Channel channel) {
         this.channel = channel;
     }
+
+    public void inactive() {
+
+    }
+
+    public void onRead(MessageProtocol message) {
+
+    }
 }
