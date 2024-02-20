@@ -1,5 +1,6 @@
 package com.fish.net.tcp.base;
 
+import com.fish.task.TickTask;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelId;
 
@@ -11,18 +12,21 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author: cc
  * @date: 2024/1/11
  */
-public class ChannelManager implements _INetListener {
-    private ConcurrentHashMap<ChannelId, ChannelObj> channelMap;
-
-    private MessageBus messageBus;
+public abstract class ChannelManager implements _INetListener, TickTask {
+    protected ConcurrentHashMap<ChannelId, ChannelObj> channelMap;
 
     public ChannelManager() {
         channelMap = new ConcurrentHashMap<>();
     }
 
     @Override
-    public void onAccept(Channel channel) {
-        ChannelObj channelObj = new ChannelObj(channel);
+    public void onAccept(Channel channel, _IProtocolHandlerMgr protocolHandlerMgr) {
+        if (channelMap.containsKey(channel.id())) {
+            //已经存在这个channel
+            return;
+        }
+        _IProtocolHandler handler = protocolHandlerMgr.ensureProtocolHandler(channel.id());
+        ChannelObj channelObj = new ChannelObj(channel, handler);
         channelMap.put(channel.id(), channelObj);
     }
 
@@ -42,6 +46,16 @@ public class ChannelManager implements _INetListener {
         if (channelObj == null) {
             return;
         }
-        channelObj.onRead(message);
+        channelObj.putInBoundMessage(message);
+    }
+
+    @Override
+    public void tick() {
+        for (ChannelObj ob : channelMap.values()) {
+            if (ob == null) {
+                continue;
+            }
+            ob.tick();
+        }
     }
 }

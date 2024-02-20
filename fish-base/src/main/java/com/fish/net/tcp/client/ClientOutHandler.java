@@ -13,4 +13,9 @@ public class ClientOutHandler extends ChannelOutboundHandlerAdapter {
         log.info("client write ... msg:{}", msg);
         super.write(ctx, msg, promise);
     }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+    }
 }

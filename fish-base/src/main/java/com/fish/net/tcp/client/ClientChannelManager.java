@@ -1,6 +1,8 @@
 package com.fish.net.tcp.client;
 
 import com.fish.net.tcp.base.ChannelManager;
+import com.fish.net.tcp.base._IProtocolHandler;
+import io.netty.channel.ChannelId;
 
 /**
  * @author: cc
@@ -8,5 +10,4 @@ import com.fish.net.tcp.base.ChannelManager;
  */
 public class ClientChannelManager extends ChannelManager {
     public static final ClientChannelManager INSTANCE = new ClientChannelManager();
-
 }

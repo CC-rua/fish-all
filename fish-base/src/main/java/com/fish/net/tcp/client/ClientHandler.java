@@ -2,8 +2,12 @@ package com.fish.net.tcp.client;
 
 import com.fish.net.tcp.base.MessageProtocol;
 import com.fish.net.tcp.base._INetListener;
+import com.fish.net.tcp.base._IProtocolHandlerMgr;
+import com.fish.protocol.TestProtocol;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -17,6 +21,13 @@ public class ClientHandler extends SimpleChannelInboundHandler<MessageProtocol> 
      * 信道事件的监听者
      */
     private List<_INetListener> listenerList;
+
+    /**
+     * 消息处理的管理者
+     */
+    @Getter
+    @Setter
+    private _IProtocolHandlerMgr protocolHandlerMgr;
 
     public ClientHandler() {
         listenerList = new ArrayList<>();
@@ -51,7 +62,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<MessageProtocol> 
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("信道活跃 - channel id {}", ctx.channel().id());
         super.channelActive(ctx);
-        listenerList.forEach(l -> l.onAccept(ctx.channel()));
+        listenerList.forEach(l -> l.onAccept(ctx.channel(), protocolHandlerMgr));
     }
 
     @Override

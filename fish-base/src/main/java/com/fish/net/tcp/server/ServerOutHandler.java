@@ -9,7 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ServerOutHandler extends ChannelOutboundHandlerAdapter {
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        log.info("client write ... msg:{}", msg);
+        log.info("server write ... msg:{}", msg);
         super.write(ctx, msg, promise);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
     }
 }

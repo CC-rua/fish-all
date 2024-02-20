@@ -10,7 +10,7 @@ public interface _INetListener {
     /**
      * 接受到来自网络层的一个连接
      */
-    void onAccept(Channel channel);
+    void onAccept(Channel channel, _IProtocolHandlerMgr protocolHandlerMgr);
 
     /**
      * channel失效

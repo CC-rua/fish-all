@@ -1,7 +1,6 @@
 package com.fish.net.tcp.base;
 
 
-import com.google.protobuf.MessageLite;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +10,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class MessageProtocol implements Serializable {
+    //协议号
     private Integer messageId;
+    //序列号
     private Integer seqNum;
-
+    //响应码
     private Integer responseCode;
+    //正文
     private byte[] data;
 
     public int getDataLength() {

@@ -2,6 +2,7 @@ package com.fish.net.tcp.client;
 
 import com.fish.net.tcp.base.MessageDecoder;
 import com.fish.net.tcp.base.MessageEncoder;
+import com.fish.net.tcp.user.UserObjMgr;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -25,13 +26,8 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new IdleStateHandler(0L, 0L, 3600L, TimeUnit.SECONDS))
-                .addLast(new HttpClientCodec())
-                .addLast(WebSocketClientCompressionHandler.INSTANCE)
-                .addLast(new ChunkedWriteHandler())
-                .addLast(new HttpObjectAggregator(65536))
                 .addLast(new ClientOutHandler())
                 .addLast(new MessageDecoder())
-                .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new MessageEncoder())
                 .addLast(makeClientHandler());
     }
@@ -39,6 +35,7 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
     private ClientHandler makeClientHandler() {
         ClientHandler clientHandler = new ClientHandler();
         clientHandler.register(ClientChannelManager.INSTANCE);
+        clientHandler.setProtocolHandlerMgr(new UserObjMgr());
         return clientHandler;
     }
 }
